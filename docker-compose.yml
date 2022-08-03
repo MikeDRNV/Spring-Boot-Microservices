@@ -84,6 +84,21 @@ services:
       - postgres
       - rabbitmq
 
+  fraud:
+    image: mikedrnv/fraud:latest
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - postgres
+      - rabbitmq
+
 networks:
   postgres:
     driver: bridge
